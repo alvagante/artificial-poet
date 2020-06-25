@@ -13,5 +13,5 @@ Author input data:
 
 Output data:
 
-    output/$author-$title-$epochs-$rundate.txt'
+    output/$author/$title-$epochs-$rundate.txt'
   

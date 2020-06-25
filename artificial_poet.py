@@ -28,7 +28,7 @@ epochs=sys.argv[4] if len(sys.argv) > 4 else "20"
 text_file_path = 'texts/' + author + '-mini.txt'
 
 summary = "Start datetime: " + rundate + " | Author: " + author + " | Title: " + titolo + " | Epochs: " + epochs
-output_file_path = 'output/' + author + '-' + titolo +  '-' + epochs + '-' + rundate + '.txt'
+output_file_path = 'output/' + author + '/' + titolo +  '-' + epochs + '-' + rundate + '.txt'
 
 print(summary)
 
