@@ -1,4 +1,12 @@
 # -*- coding: utf-8 -*-
+import sys
+sys.path.append("C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v10.1\\bin")
+sys.path.append("C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v10.1\\lib\\x64")
+sys.path.append("C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v10.1\\libnvvp")
+sys.path.append("C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.0\\bin")
+sys.path.append("C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.0\\lib\\x64")
+sys.path.append("C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.0\\libnvvp")
+print (sys.path)
 
 import numpy as np
 import tensorflow as tf
@@ -11,14 +19,17 @@ from keras.utils import to_categorical
 
 import datetime
 rundate = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-import sys
-author='carducci'
+
+
+author=sys.argv[1] if len(sys.argv) > 1 else "carducci"
+titolo=sys.argv[2] if len(sys.argv) > 2 else "notte"
+lenght=sys.argv[3] if len(sys.argv) > 3 else "30"
+epochs=sys.argv[4] if len(sys.argv) > 4 else "20"
 text_file_path = 'texts/' + author + '-mini.txt'
-titolo=sys.argv[1] if len(sys.argv) > 1 else "notte"
-lenght=sys.argv[2] if len(sys.argv) > 2 else "30"
-epochs=sys.argv[3] if len(sys.argv) > 3 else "20"
 
 summary = "Start datetime: " + rundate + " | Author: " + author + " | Title: " + titolo + " | Epochs: " + epochs
+output_file_path = 'output/' + author + '-' + titolo +  '-' + epochs + '-' + rundate + '.txt'
+
 print(summary)
 
 
@@ -102,6 +113,6 @@ def predict(seed_text , seed=10 ):
 
 prediction = predict( titolo, int( lenght ) ) 
 
-with open('output.txt', 'w') as f:
+with open(output_file_path, 'w') as f:
     sys.stdout = f # Change the standard output to the file we created.
     print(prediction)
