@@ -1,38 +1,25 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Jun 24 21:41:14 2020
-
-@author: alvag
-"""
-
-
-#Uninstall
-#!pip uninstall tensorflow
-# Install version 1.0.0
-#!pip install tensorflow==1.14
-
 
 import numpy as np
 import tensorflow as tf
-
-# Run this cell to mount your Google Drive.
-#from google.colab import drive
-#drive.mount('/content/drive')
-
-#!pip install keras
-
 
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from tensorflow import keras
-from tensorflow import keras
-#import tensorflow.contrib.keras as keras
 from keras.layers import *
-import tensorflow as tf
-import numpy as np
 from keras.utils import to_categorical
 
-text_file_path = 'neruda_poem.txt'
+import datetime
+rundate = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+import sys
+author='carducci'
+text_file_path = 'texts/' + author + '-mini.txt'
+titolo=sys.argv[1] if len(sys.argv) > 1 else "notte"
+lenght=sys.argv[2] if len(sys.argv) > 2 else "30"
+epochs=sys.argv[3] if len(sys.argv) > 3 else "20"
+
+summary = "Start datetime: " + rundate + " | Author: " + author + " | Title: " + titolo + " | Epochs: " + epochs
+print(summary)
 
 
 def get_raw_data_from_file( path ):
@@ -41,7 +28,7 @@ def get_raw_data_from_file( path ):
         text += fd.read()
     return text
 
-raw_text = get_raw_data_from_file( text_file_path)
+raw_text = get_raw_data_from_file(text_file_path)
 
 tokenizer = Tokenizer()
 
@@ -88,15 +75,13 @@ model.compile(
     metrics=[ 'accuracy' ]
 )
 model.summary()
-"""
 model.fit(
     x,
     y,
     batch_size=50 ,
-    epochs=150,
+    epochs=int(epochs),
     verbose=2,
 )
-"""
 
 def predict(seed_text , seed=10 ):
 
@@ -115,12 +100,8 @@ def predict(seed_text , seed=10 ):
 
     return seed_text
 
-print( 
-  predict( 
-    input( 'Enter some starter text ( I want ... ) : ') , 
-    int( input( 'Enter the desired length of the generated sentence : '))  
-  ) 
-)
+prediction = predict( titolo, int( lenght ) ) 
 
-
-
+with open('output.txt', 'w') as f:
+    sys.stdout = f # Change the standard output to the file we created.
+    print(prediction)
