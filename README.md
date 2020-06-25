@@ -1,11 +1,11 @@
 
 # Neruda
 
-    apoet.py $author $title $lenght_of_text $epochs
+    artificial_poet.py $author $title $lenght_of_text $epochs
 
 Defaults:
 
-    apoet.py carducci notte 30 20
+    artificial_poet.py carducci notte 30 20
 
 Author input data:
 
