@@ -1,5 +1,5 @@
 
-# Neruda
+# Artificial poet
 
     artificial_poet.py $author $title $lenght_of_text $epochs
 
@@ -13,5 +13,5 @@ Author input data:
 
 Output data:
 
-    output/
+    output/$author-$title-$epochs-$rundate.txt'
   
